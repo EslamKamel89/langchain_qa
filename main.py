@@ -17,7 +17,23 @@ async def demo_basic_chain():
     result = chain.invoke({'question':"What's langchain"})
     print('Result: ',result)
     return chain
+
+async def demo_batch_execution():
+    """Demonstrated batch execution for multiple inputs"""
+    prompt = ChatPromptTemplate.from_template("Translate to french: {text}. respond only with the translated text")
+    model = ChatOpenAI(model='gpt-4o-mini' , temperature=0.5 )
+    parser = StrOutputParser()
+    chain = prompt | model | parser 
+    inputs = [{'text':text} for text in [
+        "How are you?" , 
+        "What's your name?" , 
+        "Where is the nearest restaurant?" ,
+    ]]
+    results = chain.batch(inputs)    
+    for input , result in zip(inputs, results) :
+        print(f"Input: {input['text']} => Output: {result}")
     
     
 if __name__ == '__main__' :
-    asyncio.run(demo_basic_chain())
+    # asyncio.run(demo_basic_chain())
+    asyncio.run(demo_batch_execution())
