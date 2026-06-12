@@ -44,8 +44,25 @@ async def demo_streaming() :
     for chunk in chain.stream({'topic':"Steer attention + Do Well + Be Kind = Shape Your life"}):
         print(chunk,end='' , flush=True)
         # print('')
+
+
+async def schema_inspection() :
+    """ Demonstrates input/output schema inspection """
+    prompt = ChatPromptTemplate.from_template("Summarize the following text: {text}")
+    model = ChatOpenAI(model="gpt-4o-mini" , temperature=0.7)
+    parser = StrOutputParser()
     
+    chain = prompt | model | parser
+    
+    input_schema = chain.input_schema.model_json_schema()
+    output_schema = chain.output_schema.model_json_schema()
+    
+    
+    print(f"Input Schema: {input_schema}")
+    print(f"Output Schema: {output_schema}")
+
 if __name__ == '__main__' :
     # asyncio.run(demo_basic_chain())
     # asyncio.run(demo_batch_execution())
-    asyncio.run(demo_streaming())
+    # asyncio.run(demo_streaming())
+    asyncio.run(schema_inspection())
