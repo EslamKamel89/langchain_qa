@@ -14,7 +14,7 @@ async def demo_basic_chain():
     parser = StrOutputParser()
     chain = prompt | model | parser
     
-    result = chain.invoke({'question':"What's langchain"})
+    result =await chain.ainvoke({'question':"What's langchain"})
     print('Result: ',result)
     return chain
 
@@ -29,7 +29,7 @@ async def demo_batch_execution():
         "What's your name?" , 
         "Where is the nearest restaurant?" ,
     ]]
-    results = chain.batch(inputs)    
+    results = await chain.abatch(inputs)    
     for input , result in zip(inputs, results) :
         print(f"Input: {input['text']} => Output: {result}")
 
@@ -41,7 +41,7 @@ async def demo_streaming() :
     parser = StrOutputParser()
     chain = prompt | model | parser 
     print('Streaming output: ')
-    for chunk in chain.stream({'topic':"Steer attention + Do Well + Be Kind = Shape Your life"}):
+    async for chunk in chain.astream({'topic':"Steer attention + Do Well + Be Kind = Shape Your life"}):
         print(chunk,end='' , flush=True)
         # print('')
     
