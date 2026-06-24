@@ -178,6 +178,27 @@ async def system_and_human_messages2():
     print(answer)
 
 
+def exercise_multi_model():
+    def get_response(question: str, models: list[str]) -> dict[str, str]:
+        prompt = ChatPromptTemplate.from_template("{message}")
+        parser = StrOutputParser()
+        responses = {}
+        for model_name in models:
+            model = init_chat_model(
+                model=model_name,
+                temperature=0.7,
+                streaming=False,
+            )
+            chain = prompt | model | parser
+            res = chain.invoke({"message": question})
+            responses[model_name] = res
+        return responses
+
+    results = get_response("What Is AI?", ["gpt-4o-mini", "gpt-4o"])
+    for model, answer in results.items():
+        print(f"Response from {model}: {answer}")
+
+
 if __name__ == "__main__":
     # asyncio.run(demo_basic_chain())
     # asyncio.run(demo_batch_execution())
@@ -187,4 +208,5 @@ if __name__ == "__main__":
     # asyncio.run(new_way_to_initialize_model())
     # asyncio.run(configure_models())
     # asyncio.run(system_and_human_messages())
-    asyncio.run(system_and_human_messages2())
+    # asyncio.run(system_and_human_messages2())
+    exercise_multi_model()
