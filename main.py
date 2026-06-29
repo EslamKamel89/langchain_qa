@@ -199,6 +199,62 @@ def exercise_multi_model():
         print(f"Response from {model}: {answer}")
 
 
+def hands_on_prompt_templating():
+    prompt = ChatPromptTemplate.from_template("Tell me {adjective} job about {topic}")
+    # chain = prompt | get_model() | StrOutputParser()
+    # res = chain.invoke({"adjective": "funny", "topic": "ai replacing programmers"})
+    # print(res)
+    messages = prompt.format_messages(adjective="funny", topic="programming")
+    print(messages)
+
+
+def hands_on_multi_message_templates():
+    prompt = ChatPromptTemplate.from_messages(
+        [
+            (
+                "system",
+                "You are a translator that translates from {input_language} to {output_language}",
+            ),
+            ("human", "Translate the following : {text}"),
+        ]
+    )
+    messages = prompt.format_messages(
+        input_language="english", output_language="arabic", text="I love programming"
+    )
+    print(messages)
+    chain = get_model() | StrOutputParser()
+    res = chain.invoke(messages)
+    print(res)
+
+
+from langchain_core.prompts import FewShotChatMessagePromptTemplate
+
+
+def hands_on_multi_message_templates2():
+    examples = [
+        {"input": "happy", "output": "sad"},
+        {"input": "tall", "output": "short"},
+    ]
+    example_prompt = ChatPromptTemplate.from_messages(
+        [("human", "{input}"), ("ai", "{output}")]
+    )
+    fewshot_prompt = FewShotChatMessagePromptTemplate(
+        examples=examples,
+        example_prompt=example_prompt,
+    )
+    final_prompt = ChatPromptTemplate.from_messages(
+        [
+            ("system", "Give the opposite of each word."),
+            fewshot_prompt,
+            ("human", "{input}"),
+        ]
+    )
+    print(final_prompt.format_messages(input="white"))
+    chain = final_prompt | get_model() | StrOutputParser()
+    res = chain.invoke({"input": "white"})
+    print(res)
+
+
 if __name__ == "__main__":
     # asyncio.run(demo_basic_chain())
     # asyncio.run(demo_batch_execution())
@@ -209,4 +265,7 @@ if __name__ == "__main__":
     # asyncio.run(configure_models())
     # asyncio.run(system_and_human_messages())
     # asyncio.run(system_and_human_messages2())
-    exercise_multi_model()
+    # exercise_multi_model()
+    # hands_on_prompt_templating()
+    # hands_on_multi_message_templates()
+    hands_on_multi_message_templates2()
