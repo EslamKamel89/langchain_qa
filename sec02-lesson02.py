@@ -57,16 +57,17 @@ def demo_debugging():
     prompt = ChatPromptTemplate.from_template("Say hello to {name}")
     chain = prompt | model | StrOutputParser()
     # method 1:
-    print(f"Chain input schema: {chain.input_schema.model_json_schema()}")
-    print(f"Chain output schema: {chain.output_schema.model_json_schema()}")
+    # print(f"Chain input schema: {chain.input_schema.model_json_schema()}")
+    # print(f"Chain output schema: {chain.output_schema.model_json_schema()}")
 
     # method 2:
-    result = chain.with_config(run_name="greeting_chain").invoke({"name": "Eslam"})
-    print(f"Greeting result: {result}")
+    # result = chain.with_config(run_name="greeting_chain").invoke({"name": "Eslam"})
+    # print(f"Greeting result: {result}")
 
     # method 3
     def log_step(x, step_name=""):
-        print(f"[{step_name}] {type(x).__name__}:{str(x)}")
+        print("\n-------------------------------------------------")
+        print(f"[{step_name}] {type(x).__name__}:\n{str(x)}\n")
         return x
 
     chain = (
