@@ -222,3 +222,4 @@ __marimo__/
 summarize.py
 .llmignore
 code.txt
+chroma_db
