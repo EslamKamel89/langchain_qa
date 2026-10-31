@@ -1,0 +1,118 @@
+{
+    "python.analysis.languageServerMode": "full",
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.indexing": true,
+    "python.analysis.useLibraryCodeForTypes": true,
+    "python.analysis.packageIndexDepths": [
+        {
+            "name": "langchain",
+            "depth": 4,
+            "includeAllSymbols": true
+        },
+        {
+            "name": "langchain_core",
+            "depth": 4,
+            "includeAllSymbols": true
+        },
+        {
+            "name": "langchain_community",
+            "depth": 4,
+            "includeAllSymbols": true
+        },
+        {
+            "name": "langchain_classic",
+            "depth": 3,
+            "includeAllSymbols": true
+        },
+        {
+            "name": "langchain_experimental",
+            "depth": 3,
+            "includeAllSymbols": true
+        },
+        {
+            "name": "langchain_openai",
+            "depth": 3,
+            "includeAllSymbols": true
+        },
+        {
+            "name": "langchain_anthropic",
+            "depth": 3,
+            "includeAllSymbols": true
+        },
+        {
+            "name": "langchain_chroma",
+            "depth": 3,
+            "includeAllSymbols": true
+        },
+        {
+            "name": "langchain_text_splitters",
+            "depth": 3,
+            "includeAllSymbols": true
+        },
+        {
+            "name": "langgraph",
+            "depth": 4,
+            "includeAllSymbols": true
+        },
+        {
+            "name": "langgraph_checkpoint",
+            "depth": 3,
+            "includeAllSymbols": true
+        },
+        {
+            "name": "langgraph_sdk",
+            "depth": 3,
+            "includeAllSymbols": true
+        },
+        {
+            "name": "chromadb",
+            "depth": 3,
+            "includeAllSymbols": true
+        },
+        {
+            "name": "openai",
+            "depth": 3,
+            "includeAllSymbols": true
+        },
+        {
+            "name": "anthropic",
+            "depth": 3,
+            "includeAllSymbols": true
+        },
+        {
+            "name": "pydantic",
+            "depth": 3,
+            "includeAllSymbols": true
+        },
+        {
+            "name": "pydantic_settings",
+            "depth": 2,
+            "includeAllSymbols": true
+        },
+        {
+            "name": "sqlalchemy",
+            "depth": 4,
+            "includeAllSymbols": true
+        },
+        {
+            "name": "httpx",
+            "depth": 2,
+            "includeAllSymbols": true
+        }
+    ],
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": false,
+        "strings": false
+    },
+    "editor.suggestOnTriggerCharacters": true,
+    "editor.suggest.showWords": false,
+    "editor.tabCompletion": "on",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }
+    }
+}
